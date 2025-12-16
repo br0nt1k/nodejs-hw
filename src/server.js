@@ -5,7 +5,8 @@ import { connectMongoDB } from './db/connectMongoDB.js';
 import { notFoundHandler } from './middleware/notFoundHandler.js';
 import logger from './middleware/logger.js'
 import notesRouter from './routes/notesRoutes.js'
-import {errorHandler} from './middleware/errorHandler.js'
+import { errorHandler } from './middleware/errorHandler.js'
+import { errors } from 'celebrate';
 
 
 export const app = express();
@@ -18,6 +19,7 @@ app.use(cors())
 app.use(notesRouter)
 
 app.use(notFoundHandler);
+app.use(errors());
 app.use(errorHandler)
 
 await connectMongoDB()
